@@ -1,0 +1,32 @@
+{
+  "name": "break_image_bot",
+  "version": "1.0.0",
+  "description": "Break Image Bot for Telegram",
+  "main": "index.js",
+  "scripts": {
+    "start": "node .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/imxieyi/break_image_bot.git"
+  },
+  "keywords": [
+    "break",
+    "image",
+    "bot",
+    "telegram"
+  ],
+  "author": "imxieyi",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/imxieyi/break_image_bot/issues"
+  },
+  "homepage": "https://github.com/imxieyi/break_image_bot#readme",
+  "dependencies": {
+    "jimp": "^0.6.0",
+    "socks-proxy-agent": "^4.0.1",
+    "telegraf": "^3.27.1",
+    "winston": "^3.2.1"
+  }
+}
