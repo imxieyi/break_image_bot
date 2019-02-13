@@ -20,14 +20,9 @@ npm install
 ```
 
 ## Configuration
-Create a file config.json:
-```json
-{
-    "tg_bot_token": "Your Telegram bot token here",
-    "log_file": "Log file",
-    "socks_proxy": "socks://127.0.0.1:1086"
-}
-```
+Environment variables:
+- API_TOKEN: Bot token
+- URL: Webhook URL
 
 ## Start
 ```sh

@@ -1,9 +1,12 @@
-const config = require('./config');
 const BrkImg = require('./brkimg.js');
 const Telegraf = require('telegraf');
 const { createLogger, format, transports } = require('winston');
 const { combine, timestamp, label, prettyPrint } = format;
 const SocksProxyAgent = require('socks-proxy-agent');
+
+const API_TOKEN = process.env.API_TOKEN || '';
+const PORT = process.env.PORT || 3000;
+const URL = process.env.URL || 'https://your-heroku-app.herokuapp.com';
 
 const logger = createLogger({
     level: (typeof config.level == 'undefined') ? 'info' : config.level,
@@ -13,13 +16,13 @@ const logger = createLogger({
     ),
     transports: [
         new transports.Console(),
-        new transports.File({ filename: config.log_file })
+        new transports.File({ filename: 'bot.log' })
     ]
 });
 
 var agent = null;
-if (config.socks_proxy) {
-    agent = new SocksProxyAgent('socks://127.0.0.1:1086');
+if (process.env.SOCKS_PROXY) {
+    agent = new SocksProxyAgent(process.env.SOCKS_PROXY);
 }
 const options = {
     telegram: {
@@ -27,7 +30,7 @@ const options = {
         webhookReply: true
     }
 };
-const bot = new Telegraf(config.bot_token, options);
+const bot = new Telegraf(API_TOKEN, options);
 
 bot.start(ctx => ctx.reply('Send image you want to break to me.'));
 bot.command('help', ctx => {
@@ -98,5 +101,8 @@ bot.hears(/\/breakme/, ctx => {
         ctx.reply(`Failed to fetch profile image for ${username}.`);
     })
 });
+
+bot.telegram.setWebhook(`${URL}/bot${API_TOKEN}`);
+bot.startWebhook(`/bot${API_TOKEN}`, null, PORT);
 
 bot.launch();
