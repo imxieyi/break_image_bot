@@ -9,14 +9,12 @@ const PORT = process.env.PORT || 3000;
 const URL = process.env.URL || 'https://your-heroku-app.herokuapp.com';
 
 const logger = createLogger({
-    level: (typeof config.level == 'undefined') ? 'info' : config.level,
+    level: 'info',
     format: combine(
-        timestamp(),
         prettyPrint()
     ),
     transports: [
-        new transports.Console(),
-        new transports.File({ filename: 'bot.log' })
+        new transports.Console()
     ]
 });
 
